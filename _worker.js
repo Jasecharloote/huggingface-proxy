@@ -33,6 +33,9 @@ function setResponseHeaders(
   DEBUG
 ) {
   const newResponseHeaders = new Headers(originalResponse.headers);
+
+  newResponseHeaders.delete("Content-Length");
+  
   for (const [key, value] of newResponseHeaders) {
     if (value.includes(proxyHostname)) {
       newResponseHeaders.set(
