@@ -47,6 +47,12 @@ function setResponseHeaders(
   if (DEBUG) {
     newResponseHeaders.delete("content-security-policy");
   }
+
+  // Handle missing Content-Length
+  if (!newResponseHeaders.has("Content-Length")) {
+    newResponseHeaders.set("Accept-Ranges", "bytes");
+  }
+  
   return newResponseHeaders;
 }
 
